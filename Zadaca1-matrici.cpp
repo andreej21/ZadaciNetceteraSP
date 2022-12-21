@@ -1,6 +1,5 @@
 #include <iostream>
 #include <iomanip>
-int INT_MAX = 2147483647;
 using namespace std;
 
 void vnesiMatrica(int matrix[10][10],int n,int m)
@@ -19,8 +18,7 @@ void pecatiMatrica(int matrix[10][10],int n,int m)
     {
         for(int j=0;j<m;j++)
         {
-            if(matrix[i][j]!=INT_MAX)
-                cout<<setw(5)<<matrix[i][j];
+            cout<<setw(5)<<matrix[i][j];
         }
         cout<<endl;
     }
@@ -33,8 +31,6 @@ void najdiMaksimum(int matrix[10][10],int n,int m)
     {
         for(int j=0;j<m;j++)
         {
-            if(matrix[i][j]==INT_MAX)
-                continue;
             if(matrix[i][j]>maxBroj)
                 maxBroj=matrix[i][j];
 
@@ -49,8 +45,6 @@ void najdiMinumum(int matrix[10][10],int n,int m)
     {
         for(int j=0;j<m;j++)
         {
-            if(matrix[i][j]==INT_MAX)
-                continue;
             if(matrix[i][j]<minBroj)
                 minBroj=matrix[i][j];
 
@@ -66,9 +60,6 @@ int sumaBroeviMatrica(int matrix[10][10],int n,int m)
     {
         for(int j=0;j<m;j++)
         {
-            if(matrix[i][j]==INT_MAX)
-                continue;
-
             suma+=matrix[i][j];
         }
     }
@@ -83,8 +74,6 @@ float najdiProsekMatrica(int matrix[10][10],int n,int m)
     {
         for(int j=0;j<m;j++)
         {
-            if(matrix[i][j]==INT_MAX)
-                continue;
             suma+=matrix[i][j];
         }
     }
@@ -96,9 +85,6 @@ int main()
     cout<<"Vnesi dimenzii na matrica"<<endl;
     cin>>n>>m;
     int matrix[10][10];
-    for(int i=0;i<10;i++)
-        for(int j=0;j<10;j++)
-            matrix[i][j]=INT_MAX;
     vnesiMatrica(matrix,n,m);
     pecatiMatrica(matrix,n,m);
     najdiMaksimum(matrix,n,m);
