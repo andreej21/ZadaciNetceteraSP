@@ -1,14 +1,23 @@
 #include <iostream>
 #include <iomanip>
-int INT_MAX = 2147483647;
 using namespace std;
-
+void pecatiMatrica(int matrix[10][10],int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            cout<<setw(5)<<matrix[i][j];
+        }
+        cout<<endl;
+    }
+}
 int main()
 {
     int n,m;
     cout<<"Vnesi dimenzii na matrica " <<endl;
     cin>>n>>m;
-    int matrix[n][m];
+    int matrix[10][10];
     cout<<"Vnesi gi elementite na matricata"<<endl;
     for(int i=0;i<n;i++)
     {
@@ -18,16 +27,8 @@ int main()
         }
     }
     cout <<"Eve ja vnesenata matrica"<<endl;
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            cout<<setw(5)<<matrix[i][j];
-        }
-        cout<<endl;
-    }
-    int maxBroj = matrix[0][0];
-    int minBroj= matrix[0][0];
+    pecatiMatrica(matrix,n,m);
+
     int maxRed = 0;
     int maxKol = 0;
     int minRed = 0;
@@ -36,34 +37,26 @@ int main()
     {
         for(int j=0;j<m;j++)
         {
-            if(matrix[i][j]>maxBroj)
+            if(matrix[i][j]>matrix[maxRed][maxKol])
             {
-                maxBroj=matrix[i][j];
                 maxRed=i;
                 maxKol=j;
             }
-            if(matrix[i][j]<minBroj)
+            if(matrix[i][j]<matrix[minRed][minKol])
             {
-                minBroj=matrix[i][j];
+
                 minRed=i;
                 minKol=j;
             }
         }
     }
 
-    cout<<"Najgolem broj vo matricata e "<<maxBroj<<" ,i se naogja vo "<<maxRed<<" red i " <<maxKol<<" kolona."<<endl;
-    cout<<"Najmal broj vo matricata e "<<minBroj<<" ,i se naogja vo "<<minRed<<" red i " <<minKol<<" kolona."<<endl;
+    cout<<"Najgolem broj vo matricata e "<<matrix[maxRed][maxKol]<<" ,i se naogja vo "<<maxRed<<" red i " <<maxKol<<" kolona."<<endl;
+    cout<<"Najmal broj vo matricata e "<<matrix[minRed][minKol]<<" ,i se naogja vo "<<minRed<<" red i " <<minKol<<" kolona."<<endl;
 
-
-    matrix[maxRed][maxKol] = minBroj;
-    matrix[minRed][minKol]= maxBroj;
+    int temp = matrix[maxRed][maxKol];
+    matrix[maxRed][maxKol] = matrix[minRed][minKol];
+    matrix[minRed][minKol]= temp;
     cout<<"Matricata so smeneti mesta na najgolemiot i najmaliot broj : "<<endl;
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            cout<<setw(5)<<matrix[i][j];
-        }
-        cout<<endl;
-    }
+    pecatiMatrica(matrix,n,m);
 }
