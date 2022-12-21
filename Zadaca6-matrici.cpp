@@ -1,7 +1,5 @@
 #include <iostream>
 #include <iomanip>
-#include <set>
-int INT_MAX = 2147483647;
 using namespace std;
 
 int main()
@@ -26,23 +24,33 @@ int main()
     }
     for(int i=0;i<n;i++)
     {
-        bool opagjacki = true;
-        bool rastecki = true;
+        bool opagjacki = false;
+        bool rastecki = false;
         for(int j=1;j<m;j++)
         {
-            if(matrix[i][j]>matrix[i][j-1])
+            if(matrix[i][1]>matrix[i][0] && !rastecki)
+            {
+                rastecki=true;
                 continue;
-            else
+            }
+            else if(matrix[i][1]<matrix[i][0]&&!opagjacki)
+            {
+                opagjacki=true;
+                continue;
+            }
+            else if(matrix[i][1]==matrix[i][0]&& (!rastecki || !opagjacki))
+                break;
+
+            if(rastecki && matrix[i][j]>matrix[i][j-1])
+                continue;
+            else if(rastecki && matrix[i][j]<=matrix[i][j-1])
             {
                 rastecki=false;
                 break;
             }
-        }
-        for(int j=1;j<m;j++)
-        {
-            if(matrix[i][j]<matrix[i][j-1])
+            else if(opagjacki && matrix[i][j]<matrix[i][j-1])
                 continue;
-            else
+            else if(opagjacki && matrix[i][j]>=matrix[i][j-1])
             {
                 opagjacki=false;
                 break;
@@ -58,23 +66,33 @@ int main()
     }
     for(int i=0;i<m;i++)
     {
-        bool opagjacki = true;
-        bool rastecki = true;
+        bool opagjacki = false;
+        bool rastecki = false;
         for(int j=1;j<n;j++)
         {
-            if(matrix[j][i]>matrix[j-1][i])
+            if(matrix[1][i]>matrix[0][i] && !rastecki)
+            {
+                rastecki=true;
                 continue;
-            else
+            }
+            else if(matrix[1][i]<matrix[0][i]&&!opagjacki)
+            {
+                opagjacki=true;
+                continue;
+            }
+            else if(matrix[1][i]==matrix[0][i]&& (!rastecki || !opagjacki))
+                break;
+
+            if(rastecki && matrix[j][i]>matrix[j-1][i])
+                continue;
+            else if(rastecki &&  matrix[j][i]<=matrix[j-1][i])
             {
                 rastecki=false;
                 break;
             }
-        }
-        for(int j=1;j<n;j++)
-        {
-            if(matrix[j][i]<matrix[j-1][i])
+            else if(opagjacki &&  matrix[j][i]<matrix[j-1][i])
                 continue;
-            else
+            else if(opagjacki &&  matrix[j][i]>=matrix[j-1][i])
             {
                 opagjacki=false;
                 break;
